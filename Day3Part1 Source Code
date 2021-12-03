@@ -1,0 +1,53 @@
+using System;
+namespace Day3part1
+{
+    class MainClass
+    {
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("Opening input file...");
+            string[] lines = System.IO.File.ReadAllLines(@"input.txt");
+            Console.WriteLine("Read {0} lines...", lines.Length);
+            //List<string> ZEROS = new List<string>();
+            //List<string> ONES = new List<string>();
+            string GammaRate = "";
+            string EpsilonRate = "";
+            char zero = '0';
+            char one = '1';
+            int zeroFreq = 0;
+            int oneFreq = 0;
+            for (int c = 0; c < 12; c++)
+            {
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    string FileString = lines[i];
+                    if (FileString[c] == zero)
+                    {
+                        zeroFreq++;
+                    }
+                    else if (FileString[c] == one)
+                    {
+                        oneFreq++;
+                    }
+                }
+                if (zeroFreq < oneFreq)
+                {
+                    GammaRate += zero;
+                    EpsilonRate += one;
+                }
+                else
+                {
+                    GammaRate += one;
+                    EpsilonRate += zero;
+                }
+                zeroFreq = 0;
+                oneFreq = 0;
+            }
+            int GammaNum = Convert.ToInt32(GammaRate, 2);
+            int EpsilonNum = Convert.ToInt32(EpsilonRate, 2);
+            int total = GammaNum * EpsilonNum;
+            Console.WriteLine(total);
+            
+        }
+    }
+}
